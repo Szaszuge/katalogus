@@ -10,7 +10,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/assets', express.static('assets'));
 
-
 var connection = mysql.createConnection({
   host     : process.env.DBHOST,
   user     : process.env.DBUSER,
