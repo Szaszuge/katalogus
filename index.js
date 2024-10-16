@@ -41,6 +41,10 @@ app.get('/books', (req, res) =>{
     });
 });
 
-app.post('/books', (req, res) =>{
-    
-})
+app.post('/books', (req, res) => {
+    const { title, publication_year, isbn } = req.body;
+    db.query('INSERT INTO books (title, publish_year, isbn) VALUES (?, ?, ?)', [title, publish_year, isbn], (err, result) => {
+        if (err) throw err;
+        res.send({ id: result.insertId, title, publication_year, isbn });
+    });
+});
