@@ -1,7 +1,59 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: purple;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 #book-list {
-    margin: 20px 0;
+    display: table;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 800px;
+    border-collapse: collapse;
+}
+
+.header {
+    display: table-row;
+    background-color: #343a40;
+    color: white;
+    font-weight: bold;
+}
+
+.header div {
+    padding: 15px 10px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+#bookTableBody {
+    display: table-row-group;
+}
+
+#bookTableBody div {
+    display: table-row;
+    border-bottom: 1px solid #dee2e6;
+    padding: 10px 0;
+}
+
+#bookTableBody div:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+#bookTableBody div div {
+    display: table-cell;
+    padding: 10px;
+    text-align: left;
+}
+
+.book-title {
+    font-weight: bold;
+}
+
+.book-isbn {
+    color: #6c757d;
 }
