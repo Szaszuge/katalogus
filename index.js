@@ -10,21 +10,37 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 app.use('/assets', express.static('assets'));
 
-var connection = mysql.createConnection({
-  host     : process.env.DBHOST,
-  user     : process.env.DBUSER,
-  password : process.env.DBPASS,
-  database : process.env.DBNAME
-});
+var pool  = mysql.createPool({
+    connectionLimit : process.env.CONNECTIONLIMIT,
+    host            : process.env.DBHOST,
+    user            : process.env.DBUSER,
+    password        : process.env.DBPASS,
+    database        : process.env.DBNAME
+  });
 
-connection.connect((err)=>{
-    if (err){
-        console.log(err);
-        return;
-    }
-    console.log(`Connected to MySQL database.`)
-});
 
 app.listen(port, ()=>{
     console.log(`Server listening on port ${port}...`);
 });
+
+//get API version
+app.get('/', (req, res) => {
+    res.send(`API version : ${process.env.VERSION}`);
+  });
+
+//összes könyv listázása
+
+app.get('/books', (req, res) =>{
+    pool.query('SELECT * FROM books', (err, results) => {
+        if(err){
+            res.status(500).send('Hiba történt az adatbázisművelet közben!');
+            return;
+        }
+        res.status(200).send(results)
+        return;
+    });
+});
+
+app.post('/books', (req, res) =>{
+    
+})
