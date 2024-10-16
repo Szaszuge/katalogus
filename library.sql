@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Okt 16. 08:52
+-- Létrehozás ideje: 2024. Okt 16. 10:59
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -33,6 +33,16 @@ CREATE TABLE `authors` (
   `birth_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
+--
+-- A tábla adatainak kiíratása `authors`
+--
+
+INSERT INTO `authors` (`author_id`, `name`, `birth_date`) VALUES
+(1, 'Gárdonyi Géza', '1863-08-03'),
+(2, 'Jókai Mór', '1825-02-18'),
+(3, 'Fekete István', '1900-01-25'),
+(4, 'Móricz Zsigmond', '1879-06-29');
+
 -- --------------------------------------------------------
 
 --
@@ -45,6 +55,17 @@ CREATE TABLE `books` (
   `publish_year` year(4) NOT NULL,
   `isbn` int(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
+
+--
+-- A tábla adatainak kiíratása `books`
+--
+
+INSERT INTO `books` (`book_id`, `title`, `publish_year`, `isbn`) VALUES
+(2, 'Egri csillagok', '0000', 2147483647),
+(3, 'Az arany ember', '0000', 2147483647),
+(4, 'Tüskevár', '1957', 2147483647),
+(5, 'A kőszívű ember fiai', '0000', 2147483647),
+(6, 'Légy jó mindhalálig', '1920', 2147483647);
 
 -- --------------------------------------------------------
 
@@ -88,13 +109,13 @@ ALTER TABLE `book_authors`
 -- AUTO_INCREMENT a táblához `authors`
 --
 ALTER TABLE `authors`
-  MODIFY `author_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT a táblához `books`
 --
 ALTER TABLE `books`
-  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Megkötések a kiírt táblákhoz
