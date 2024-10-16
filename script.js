@@ -5,7 +5,7 @@ async function fetchBooks() {
     bookList.innerHTML = '';
     books.forEach(books => {
         const div = document.createElement('div');
-        div.textContent = `${books.title} (${books.publish_year}) - ISBN: ${books.isbn}`;
+        div.textContent = `${books.book_id} ${books.title} (${books.publish_year}) - ISBN: ${books.isbn}`;
         bookList.appendChild(div);
     });
 }
