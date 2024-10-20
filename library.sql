@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2024. Okt 16. 10:59
+-- Létrehozás ideje: 2024. Okt 20. 12:59
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -53,7 +53,7 @@ CREATE TABLE `books` (
   `book_id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `publish_year` year(4) NOT NULL,
-  `isbn` int(13) NOT NULL
+  `isbn` varchar(13) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;
 
 --
@@ -61,11 +61,12 @@ CREATE TABLE `books` (
 --
 
 INSERT INTO `books` (`book_id`, `title`, `publish_year`, `isbn`) VALUES
-(2, 'Egri csillagok', '0000', 2147483647),
-(3, 'Az arany ember', '0000', 2147483647),
-(4, 'Tüskevár', '1957', 2147483647),
-(5, 'A kőszívű ember fiai', '0000', 2147483647),
-(6, 'Légy jó mindhalálig', '1920', 2147483647);
+(2, 'Egri csillagok', '1968', '8488253953498'),
+(3, 'Az arany ember', '2003', '1190429688237'),
+(4, 'Tüskevár', '1957', '7412363938309'),
+(5, 'A kőszívű ember fiai', '1954', '5379448365942'),
+(6, 'Légy jó mindhalálig', '1920', '5183805590309'),
+(16, 'A legjobb könyv', '2002', '9834567921173');
 
 -- --------------------------------------------------------
 
@@ -115,7 +116,7 @@ ALTER TABLE `authors`
 -- AUTO_INCREMENT a táblához `books`
 --
 ALTER TABLE `books`
-  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `book_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Megkötések a kiírt táblákhoz
