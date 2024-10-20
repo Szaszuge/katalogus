@@ -1,5 +1,5 @@
 async function fetchBooks() {
-    const response = await fetch('http://localhost:5000/books'); // Győződj meg róla, hogy a backend a megfelelő adatokat küldi.
+    const response = await fetch('http://localhost:5000/books'); 
     const books = await response.json();
     const bookList = document.getElementById('book-list');
     bookList.innerHTML = `<tr>
