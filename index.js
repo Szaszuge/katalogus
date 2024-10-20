@@ -85,3 +85,45 @@ app.post('/books', (req, res) => {
         }
     );
 });
+
+
+// List all authors
+app.get('/authors', (req, res) => {
+    pool.query('SELECT * FROM authors', (err, results) => {
+        if (err) {
+            res.status(500).send('Adatbázis probléma!');
+            return;
+        }
+        res.status(200).send(results);
+    });
+});
+
+// Szerző törlése
+app.delete('/authors/:id', (req, res) => {
+    const { id } = req.params;
+    pool.query('DELETE FROM authors WHERE id = ?', [id], (err, result) => {
+        if (err) {
+            res.status(500).send('Probléma a szerző törlése közben!');
+            return;
+        }
+        res.status(200).send('Szerző sikeresen törölve!');
+    });
+});
+
+// Új szerző hozzáadása
+app.post('/authors', (req, res) => {
+    const { name, birth_date } = req.body;
+
+    pool.query(
+        'INSERT INTO authors (name, birth_date) VALUES (?, ?)',
+        [name, birth_date],
+        (err, result) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send('Probléma a szerző hozzáadása közben!');
+                return;
+            }
+            res.status(201).send({ message: 'Szerző sikeresen hozzáadva!', id: result.insertId });
+        }
+    );
+});
