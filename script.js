@@ -12,15 +12,26 @@ async function fetchBooks() {
     
     books.forEach(book => {
         const row = document.createElement('tr');
+        let authors = fetchAuthors(book.book_id);
+        console.log(`authors`)
         row.innerHTML = `
             <td>${book.book_id}</td>
             <td class="book-title">${book.title}</td>
-            <td>${book.author}</td> <!-- Itt már elérheted az author-t -->
+            <td>${authors}</td>
             <td>${book.publish_year}</td>
             <td class="book-isbn">${book.isbn}</td>
         `;
         bookList.appendChild(row);
     });
 }
-
+async function fetchAuthors(bookID) {
+    const response = await fetch(`http://localhost:5000/authorsOf/${bookID}`); 
+    const authors = await response.json();
+    let valasz = "";
+    authors.forEach(author => {
+        valasz += `${author.name}, `
+    })
+    console.log(`${valasz}`);
+    return (valasz);
+}
 fetchBooks();

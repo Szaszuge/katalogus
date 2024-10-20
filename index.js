@@ -101,7 +101,7 @@ app.get('/authors', (req, res) => {
 // Szerző törlése
 app.delete('/authors/:id', (req, res) => {
     const { id } = req.params;
-    pool.query('DELETE FROM authors WHERE id = ?', [id], (err, result) => {
+    pool.query('DELETE FROM authors WHERE author_id = ?', [id], (err, result) => {
         if (err) {
             res.status(500).send('Probléma a szerző törlése közben!');
             return;
@@ -126,4 +126,26 @@ app.post('/authors', (req, res) => {
             res.status(201).send({ message: 'Szerző sikeresen hozzáadva!', id: result.insertId });
         }
     );
+});
+
+// Ez a kacsapcsolat zsír
+app.get('/authorsOf/:bookID/', (req, res) => {
+    if (!req.params.bookID) {
+      res.status(203).send('Hiányzó adatok!');
+      return;
+    }
+    pool.query(`SELECT name FROM authors INNER JOIN book_authors ON authors.author_id = book_authors.author_id INNER JOIN books ON book_authors.book_id = books.book_id WHERE books.book_id = ${req.params.bookID}`,  (err, results) => {
+      if (err){
+        console.log(err);
+        res.status(500).send('Hiba történt az adatbázis lekérés közben!');
+        return;
+      }
+      if (results.length == 0){
+        res.status(203).send('Nincsenek írók regisztrálva a könyvhöz!');
+        return;
+      }
+      res.status(202).send(results);
+      return;
+    });
+
 });

@@ -3,8 +3,6 @@ async function fetchAuthors() {
     const response = await fetch('http://localhost:5000/authors');
     const authors = await response.json();
 
-    console.log(authors); // Log the authors to check their structure
-
     const authorList = document.getElementById('author-list');
     authorList.innerHTML = `
         <tr>
@@ -16,9 +14,6 @@ async function fetchAuthors() {
 
     authors.forEach(author => {
         const formattedDate = new Date(author.birth_date).toLocaleDateString('hu-HU');
-
-        // Check property names here
-        console.log(author); // Log individual author object
 
         const row = document.createElement('tr');
         row.innerHTML = `
@@ -37,14 +32,18 @@ async function fetchAuthors() {
 async function deleteAuthor(authorId) {
     const response = await fetch(`http://localhost:5000/authors/${authorId}`, {
         method: 'DELETE'
-    });
-
-    if (response.ok) {
-        alert('Szerző sikeresen törölve!');
-        fetchAuthors(); // Refresh the list
-    } else {
-        alert('Probléma a szerző törlése közben!');
+    }).then(function(response){
+        if (response.ok) {
+            alert('Szerző sikeresen törölve!');
+            fetchAuthors(); // Refresh the list
+        } else {
+            alert('Probléma a szerző törlése közben!');
+        }
     }
+    );
+
+
+    
 }
 
 // Új szerző hozzáadása
