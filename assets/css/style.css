@@ -1,66 +1,86 @@
-body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef); 
-    margin: 0;
-    padding: 20px;
-}
-
-h1 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #343a40;
-}
-
-#book-list {
+/* General styling for all tables */
+table {
     width: 100%;
-    margin: 0 auto;
-    max-width: 100%; 
-    border-collapse: collapse;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-#book-list th, #book-list td {
-    padding: 15px;
+    border-collapse: collapse; 
+    margin: 25px 0;
+    font-size: 18px;
     text-align: left;
-    border: 1px solid #dee2e6;
 }
 
-#book-list th {
-    background-color: #343a40;
-    color: white;
-    font-weight: bold;
+
+.styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
 }
 
-#book-list tr:nth-child(odd) {
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    border: 2px solid lightgray; 
+    text-align: center; 
+}
+
+/* Body rows */
+.styled-table tbody tr {
     background-color: #f9f9f9;
+    border-bottom: 1px solid #dddddd;
 }
 
-#book-list tr:hover {
-    background-color: #e2e6ea;
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
 }
 
-.book-title {
-    font-weight: bold;
+/* Last row styling */
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
 }
 
-.book-isbn {
-    color: #6c757d;
+/* Add hover effect to rows */
+.styled-table tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
 }
 
-.book-info {
-    padding: 10px;
+/* Styling for header */
+.styled-table th {
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border: 1px solid gray;
 }
 
+/* Buttons within the table */
+.button-container {
+    display: flex;
+    gap: 10px;
+}
 
-@media (max-width: 600px) {
-    #book-list {
-        max-width: 100%; 
-    }
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
 
-    #book-list th, #book-list td {
-        padding: 10px;
-        font-size: 14px;
-    }
+button.szerkesztes {
+    background-color: #f1c40f;
+    color: white;
+}
+
+button.szerkesztes:hover {
+    background-color: #d4ac0d;
+}
+
+button.torles {
+    background-color: #e74c3c;
+    color: white;
+}
+
+button.torles:hover {
+    background-color: #c0392b;
 }
 
 h1 {
@@ -78,3 +98,9 @@ h1 {
     display: block; 
 }
 
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef); 
+    margin: 0;
+    padding: 20px;
+}
