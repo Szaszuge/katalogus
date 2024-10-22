@@ -46,7 +46,7 @@ function fetchAuthors(bookID, callback) {
             authors.forEach(author => {
                 authorNames += `${author.name}, `;
             });
-            callback(authorNames.slice(0, -2)); // Remove the last comma and space
+            callback(authorNames.slice(0, -2)); 
         } else if (xhr.status === 203) {
             callback('Nincsenek szerzők');
         } else {
@@ -59,5 +59,5 @@ function fetchAuthors(bookID, callback) {
     xhr.send();
 }
 
-// Call the function to fetch books
+
 fetchBooks();

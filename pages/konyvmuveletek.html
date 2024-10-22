@@ -11,6 +11,7 @@
     <h1>Könyv Műveletek</h1>
 
     <form id="add-book-form">
+        <input type="hidden" id="book-id">
         <div class="mb-3">
             <label for="cim" class="form-label">Cím</label>
             <input type="text" class="form-control" id="cim" placeholder="Könyv címe" required>
@@ -26,8 +27,12 @@
             <input type="text" class="form-control" id="isbn_szam" placeholder="ISBN szám (13 számjegy)" required>
         </div>
     
-        <button type="submit" class="btn btn-primary">Mentés</button>
+        <div class="btn-group" role="group" aria-label="Book actions">
+            <button type="submit" class="btn btn-primary">Mentés</button>
+            <button type="button" class="btn btn-secondary" id="update-book-button">Módosítás</button>
+        </div>
     </form>
+    
     <br>
 
     <table id="book-list" class="styled-table">
@@ -41,7 +46,7 @@
             </tr>
         </thead>
         <tbody>
-            <!-- Content will be loaded dynamically -->
+            
         </tbody>
     </table>
 

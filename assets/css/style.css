@@ -1,4 +1,4 @@
-/* General styling for all tables */
+
 table {
     width: 100%;
     border-collapse: collapse; 
@@ -21,7 +21,7 @@ table {
     text-align: center; 
 }
 
-/* Body rows */
+
 .styled-table tbody tr {
     background-color: #f9f9f9;
     border-bottom: 1px solid #dddddd;
@@ -31,18 +31,18 @@ table {
     background-color: #f3f3f3;
 }
 
-/* Last row styling */
+
 .styled-table tbody tr:last-of-type {
     border-bottom: 2px solid #009879;
 }
 
-/* Add hover effect to rows */
+
 .styled-table tbody tr:hover {
     background-color: #f1f1f1;
     cursor: pointer;
 }
 
-/* Styling for header */
+
 .styled-table th {
     font-size: 20px;
     text-transform: uppercase;
@@ -50,7 +50,7 @@ table {
     border: 1px solid gray;
 }
 
-/* Buttons within the table */
+
 .button-container {
     display: flex;
     gap: 10px;
@@ -103,4 +103,12 @@ body {
     background: linear-gradient(135deg, #f8f9fa, #e9ecef); 
     margin: 0;
     padding: 20px;
+}
+
+.btn-group {
+    margin-top: 10px; 
+}
+
+.btn-group .btn {
+    margin-right: 8px; 
 }

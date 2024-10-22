@@ -1,4 +1,4 @@
-// Szerzők displayelése
+// Fetch authors and display them
 async function fetchAuthors() {
     const response = await fetch('http://localhost:5000/authors');
     const authors = await response.json();
@@ -17,36 +17,41 @@ async function fetchAuthors() {
 
         const row = document.createElement('tr');
         row.innerHTML = `
-            <td>${author.id || author.author_id}</td> <!-- Use the correct property name -->
+            <td>${author.id || author.author_id}</td>
             <td>${author.name}</td>
             <td>${formattedDate}</td>
             <td>
-                <button class="btn btn-warning">Módosítás</button>
+                <button class="btn btn-warning" onclick="editAuthor(${author.id || author.author_id}, '${author.name}', '${author.birth_date}')">Módosítás</button>
                 <button class="btn btn-danger" onclick="deleteAuthor(${author.id || author.author_id})">Törlés</button>
             </td>`;
         authorList.appendChild(row);
     });
 }
 
+// Editelés funkció
+function editAuthor(authorId, authorName, birthDate) {
+    document.getElementById('nev').value = authorName;
+    document.getElementById('szuletesi_datum').value = new Date(birthDate).toISOString().split('T')[0];
+
+
+    window.currentEditingAuthorId = authorId;
+}
+
 // Szerző törlése funkció
 async function deleteAuthor(authorId) {
     const response = await fetch(`http://localhost:5000/authors/${authorId}`, {
         method: 'DELETE'
-    }).then(function(response){
-        if (response.ok) {
-            alert('Szerző sikeresen törölve!');
-            fetchAuthors(); // Refresh the list
-        } else {
-            alert('Probléma a szerző törlése közben!');
-        }
+    });
+
+    if (response.ok) {
+        alert('Szerző sikeresen törölve!');
+        fetchAuthors(); 
+    } else {
+        alert('Probléma a szerző törlése közben!');
     }
-    );
-
-
-    
 }
 
-// Új szerző hozzáadása
+
 document.getElementById('add-author-form').addEventListener('submit', async function (event) {
     event.preventDefault();
 
@@ -59,17 +64,32 @@ document.getElementById('add-author-form').addEventListener('submit', async func
     };
 
     try {
-        const response = await fetch('http://localhost:5000/authors', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-        });
+        let response;
+        if (window.currentEditingAuthorId) {
+
+            response = await fetch(`http://localhost:5000/authors/${window.currentEditingAuthorId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            window.currentEditingAuthorId = null; 
+        } else {
+
+            response = await fetch('http://localhost:5000/authors', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+        }
 
         if (response.ok) {
-            alert('Szerző sikeresen hozzáadva!');
-            document.getElementById('add-author-form').reset(); 
+            alert('Szerző sikeresen hozzáadva vagy frissítve!');
+            resetForm(); 
             fetchAuthors(); 
         } else {
             const errorMessage = await response.text();
@@ -80,5 +100,11 @@ document.getElementById('add-author-form').addEventListener('submit', async func
         alert('Probléma a szerző hozzáadása közben!');
     }
 });
+
+
+function resetForm() {
+    document.getElementById('add-author-form').reset();
+    window.currentEditingAuthorId = null; 
+}
 
 fetchAuthors();
