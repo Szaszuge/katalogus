@@ -15,16 +15,20 @@ function fetchBooks() {
             
             books.forEach(book => {
                 const row = document.createElement('tr');
-                fetchAuthors(book.book_id, function(authors) {
-                    row.innerHTML = `
-                        <td>${book.book_id}</td>
-                        <td class="book-title">${book.title}</td>
-                        <td>${authors}</td>
-                        <td>${book.publish_year}</td>
-                        <td class="book-isbn">${book.isbn}</td>
-                    `;
-                    bookList.appendChild(row);
-                });
+                
+                
+                row.innerHTML = `
+                    <td>${book.book_id}</td>
+                    <td class="book-title">${book.title}</td>
+                    <td class="author-names">Betöltés...</td> 
+                    <td>${book.publish_year}</td>
+                    <td class="book-isbn">${book.isbn}</td>
+                `;
+                
+                bookList.appendChild(row);
+                
+                
+                fetchAuthors(book.book_id, row);
             });
         } else {
             console.error('Error fetching books');
@@ -36,28 +40,28 @@ function fetchBooks() {
     xhr.send();
 }
 
-function fetchAuthors(bookID, callback) {
+function fetchAuthors(bookID, row) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', `http://localhost:5000/authorsOf/${bookID}`, true);
     xhr.onload = function () {
-        if (xhr.status === 202 || xhr.status === 200) {
+        if (xhr.status === 200 || xhr.status === 202) {
             const authors = JSON.parse(xhr.responseText);
-            let authorNames = "";
-            authors.forEach(author => {
-                authorNames += `${author.name}, `;
-            });
-            callback(authorNames.slice(0, -2)); 
-        } else if (xhr.status === 203) {
-            callback('Nincsenek szerzők');
+
+            if (authors.length > 0) {
+                
+                const authorNames = authors.map(author => author.name).join(', ');
+                row.querySelector('.author-names').textContent = authorNames;
+            } else {
+                row.querySelector('.author-names').textContent = 'Nincsenek szerzők';
+            }
         } else {
-            console.error('Error fetching authors');
+            row.querySelector('.author-names').textContent = 'Hiba a szerzők betöltésekor';
         }
     };
     xhr.onerror = function () {
-        console.error('Request error');
+        row.querySelector('.author-names').textContent = 'Hiba a szerzők betöltésekor';
     };
     xhr.send();
 }
 
-
-fetchBooks();
+document.addEventListener('DOMContentLoaded', fetchBooks);

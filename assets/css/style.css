@@ -1,39 +1,43 @@
 
-table {
+table, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: inherit; 
+}
+
+
+table.styled-table {
     width: 100%;
-    border-collapse: collapse; 
+    border-collapse: collapse;
     margin: 25px 0;
     font-size: 18px;
     text-align: left;
+    background-color: #ffffff;
 }
 
 
 .styled-table thead tr {
-    background-color: #009879;
-    color: #ffffff;
-    text-align: left;
+    background-color: #009879 !important; 
+    color: #ffffff !important; 
 }
+
 
 .styled-table th,
 .styled-table td {
     padding: 12px 15px;
-    border: 2px solid lightgray; 
-    text-align: center; 
+    border: 2px solid lightgray;
+    text-align: center;
 }
 
-
-.styled-table tbody tr {
-    background-color: #f9f9f9;
-    border-bottom: 1px solid #dddddd;
-}
 
 .styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
+    background-color: #f3f3f3; 
 }
 
 
-.styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #009879;
+.styled-table tbody tr:nth-of-type(odd) {
+    background-color: #ffffff;
 }
 
 
@@ -43,11 +47,24 @@ table {
 }
 
 
-.styled-table th {
-    font-size: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border: 1px solid gray;
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+
+h1 {
+    text-align: center;
+    margin: 30px auto;
+    font-size: 2.5rem;
+    color: #ffffff;
+    background: linear-gradient(90deg, #007bff, #6610f2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 90%;
+    display: block;
 }
 
 
@@ -65,6 +82,7 @@ button {
     transition: background-color 0.3s ease;
 }
 
+
 button.szerkesztes {
     background-color: #f1c40f;
     color: white;
@@ -73,6 +91,7 @@ button.szerkesztes {
 button.szerkesztes:hover {
     background-color: #d4ac0d;
 }
+
 
 button.torles {
     background-color: #e74c3c;
@@ -83,32 +102,19 @@ button.torles:hover {
     background-color: #c0392b;
 }
 
-h1 {
-    text-align: center; 
-    margin: 30px auto; 
-    font-size: 2.5rem; 
-    color: #ffffff; 
-    background: linear-gradient(90deg, #007bff, #6610f2); 
-    -webkit-background-clip: text; 
-    -webkit-text-fill-color: transparent; 
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
-    padding: 20px; 
-    border-radius: 8px; 
-    max-width: 90%; 
-    display: block; 
-}
 
 body {
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef); 
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
     margin: 0;
     padding: 20px;
 }
 
+
 .btn-group {
-    margin-top: 10px; 
+    margin-top: 10px;
 }
 
 .btn-group .btn {
-    margin-right: 8px; 
+    margin-right: 8px;
 }
